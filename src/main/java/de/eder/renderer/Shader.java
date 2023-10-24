@@ -79,6 +79,10 @@ public class Shader {
         }
     }
 
+    public int getProgramId() {
+        return programId;
+    }
+
     public record ShaderModuleData(String shaderFile, int shaderType) {
 
     }
