@@ -1,15 +1,12 @@
 package de.eder;
 
+import de.eder.engine.KeyListener;
 import de.eder.renderer.Render;
 import de.eder.scenes.Scene;
-import org.lwjgl.glfw.GLFW;
 import org.lwjgl.glfw.GLFWErrorCallback;
-import org.lwjgl.opengl.GL;
-import org.lwjgl.system.CallbackI;
 
 import static org.lwjgl.glfw.Callbacks.glfwFreeCallbacks;
 import static org.lwjgl.glfw.GLFW.*;
-import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.system.MemoryUtil.NULL;
 
 public class Window {
@@ -49,14 +46,16 @@ public class Window {
             throw new IllegalStateException("Unable to initialize GLFW");
         }
 
+
         glfwDefaultWindowHints();
 
         glfwWindow = glfwCreateWindow(width, height, title, NULL, NULL);
-
         if (glfwWindow == NULL) {
             glfwTerminate();
             System.out.println("Unable to create the window");
         }
+
+        glfwSetKeyCallback(glfwWindow,KeyListener::keyCallback);
 
         glfwMakeContextCurrent(glfwWindow);
 
